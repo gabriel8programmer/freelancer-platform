@@ -21,7 +21,12 @@
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
+  text-decoration: none;
   z-index: 1001;
+}
+
+.logo:hover {
+  color: var(--primary-dark);
 }
 
 .logo i {
@@ -46,6 +51,8 @@
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .nav-mobile.open {
@@ -67,6 +74,9 @@
   color: var(--gray);
   font-weight: 500;
   white-space: nowrap;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
 }
 
 .nav-btn:hover, .nav-btn.active {
@@ -88,6 +98,59 @@
 .user-actions {
   display: flex;
   gap: 0.75rem;
+  align-items: center;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--dark);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.user-info:hover {
+  background: var(--light-gray);
+}
+
+.user-avatar {
+  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--light-gray);
+  border-radius: 50%;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  color: var(--gray);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+}
+
+.btn-logout:hover {
+  background: var(--light-gray);
+  color: var(--dark);
 }
 
 .btn-login, .btn-signup {
@@ -98,6 +161,9 @@
   font-weight: 500;
   transition: var(--transition);
   font-size: 0.9rem;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-login {
@@ -119,6 +185,21 @@
   background: var(--primary-dark);
 }
 
+.mobile-user-actions {
+  border-top: 1px solid var(--light-gray);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.btn-logout-mobile {
+  color: #dc3545;
+}
+
+.btn-logout-mobile:hover {
+  background: #dc3545;
+  color: white;
+}
+
 @media (max-width: 768px) {
   .nav-desktop {
     display: none;
@@ -132,7 +213,9 @@
     display: flex;
   }
 
-  .user-actions {
+  .user-actions .btn-login,
+  .user-actions .btn-signup,
+  .user-actions .user-menu {
     display: none;
   }
 
@@ -152,5 +235,11 @@
 
   .logo i {
     font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-user-actions {
+    display: none;
   }
 }

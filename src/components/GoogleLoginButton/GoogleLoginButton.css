@@ -1,0 +1,33 @@
+/* src/components/GoogleLoginButton/GoogleLoginButton.css */
+.google-login-btn {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius);
+  background: white;
+  color: var(--dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+.google-login-btn:hover {
+  border-color: var(--primary);
+  background: var(--light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.google-btn-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.google-btn-content i {
+  color: #db4437;
+  font-size: 1.2rem;
+}
