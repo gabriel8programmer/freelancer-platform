@@ -1,0 +1,156 @@
+/* components/Header/Header.css */
+.header {
+  background: white;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  z-index: 1001;
+}
+
+.logo i {
+  font-size: 1.8rem;
+}
+
+.nav-desktop {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: white;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  box-shadow: var(--shadow);
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.nav-mobile.open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--gray);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-btn:hover, .nav-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.user-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-login, .btn-signup {
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.btn-login {
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.btn-login:hover {
+  background: var(--light-gray);
+}
+
+.btn-signup {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-signup:hover {
+  background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .nav-desktop {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-mobile {
+    display: flex;
+  }
+
+  .user-actions {
+    display: none;
+  }
+
+  .logo span {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: 0.75rem 0;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .logo i {
+    font-size: 1.5rem;
+  }
+}

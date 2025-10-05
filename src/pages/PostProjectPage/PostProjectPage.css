@@ -1,0 +1,132 @@
+/* pages/PostProjectPage/PostProjectPage.css */
+.post-project-page {
+  padding: 2rem 0;
+  min-height: 80vh;
+}
+
+.project-form {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2rem;
+}
+
+.form-section h3 {
+  color: var(--dark);
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-section h3::before {
+  content: '';
+  width: 4px;
+  height: 1.25rem;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-group small {
+  color: var(--gray);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.btn-publish {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .post-project-page {
+    padding: 1.5rem 0;
+  }
+
+  .project-form {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-form {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+
+  .form-section h3 {
+    font-size: 1.1rem;
+  }
+}

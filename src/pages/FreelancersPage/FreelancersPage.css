@@ -1,0 +1,22 @@
+/* pages/FreelancersPage/FreelancersPage.css */
+.freelancers-page {
+  padding: 2rem 0;
+  min-height: 80vh;
+}
+
+.freelancers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .freelancers-page {
+    padding: 1.5rem 0;
+  }
+
+  .freelancers-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

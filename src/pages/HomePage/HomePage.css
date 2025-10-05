@@ -1,0 +1,69 @@
+/* pages/HomePage/HomePage.css */
+.home-page {
+  min-height: 100vh;
+}
+
+.featured-section {
+  padding: 4rem 0;
+}
+
+.featured-section:nth-child(even) {
+  background: var(--light);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: var(--gray);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .featured-section {
+    padding: 3rem 0;
+  }
+
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .featured-section {
+    padding: 2rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .cards-grid {
+    gap: 1rem;
+  }
+}
