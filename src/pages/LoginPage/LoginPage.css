@@ -1,95 +1,201 @@
 /* src/pages/LoginPage/LoginPage.css */
 .login-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
+	min-height: 100vh;
+	background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem; /* Adicionado padding para mobile */
 }
 
 .login-card {
-  background: white;
-  padding: 3rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-lg);
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
+	background: white;
+	padding: 2.5rem;
+	border-radius: var(--border-radius);
+	box-shadow: var(--shadow-lg);
+	width: 100%;
+	max-width: 400px; /* Reduzido de 450px para 400px */
+	margin: 0 auto;
 }
 
 .login-header {
-  text-align: center;
-  margin-bottom: 2rem;
+	text-align: center;
+	margin-bottom: 2rem;
 }
 
 .login-header h1 {
-  color: var(--dark);
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
+	color: var(--dark);
+	margin-bottom: 0.5rem;
+	font-size: 1.75rem; /* Reduzido de 2rem */
+	font-weight: 700;
+	line-height: 1.3;
 }
 
 .login-header p {
-  color: var(--gray);
+	color: var(--gray);
+	font-size: 1rem; /* Definido tamanho específico */
+	line-height: 1.4;
 }
 
 .divider {
-  text-align: center;
-  margin: 1.5rem 0;
-  position: relative;
+	text-align: center;
+	margin: 1.5rem 0;
+	position: relative;
 }
 
 .divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--light-gray);
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: var(--light-gray);
 }
 
 .divider span {
-  background: white;
-  padding: 0 1rem;
-  color: var(--gray);
-  font-size: 0.9rem;
+	background: white;
+	padding: 0 1rem;
+	color: var(--gray);
+	font-size: 0.85rem; /* Reduzido de 0.9rem */
 }
 
 .login-form {
-  margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.form-group {
+	margin-bottom: 1.25rem;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--dark);
+	font-weight: 500;
+	font-size: 0.95rem; /* Tamanho específico para labels */
+}
+
+.form-group input {
+	width: 100%;
+	padding: 0.875rem; /* Ajustado padding */
+	border: 1px solid var(--light-gray);
+	border-radius: var(--border-radius);
+	font-size: 1rem;
+	transition: var(--transition);
+	box-sizing: border-box; /* Importante para mobile */
+}
+
+.form-group input:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
 }
 
 .btn-login {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
+	width: 100%;
+	padding: 0.875rem; /* Reduzido de 1rem */
+	font-size: 1rem; /* Reduzido de 1.1rem */
+	margin-top: 0.5rem;
+	font-weight: 600;
 }
 
 .login-footer {
-  text-align: center;
-  border-top: 1px solid var(--light-gray);
-  padding-top: 1.5rem;
+	text-align: center;
+	border-top: 1px solid var(--light-gray);
+	padding-top: 1.5rem;
+}
+
+.login-footer p {
+	font-size: 0.95rem;
+	color: var(--gray);
+	margin: 0;
 }
 
 .login-footer a {
-  color: var(--primary);
-  text-decoration: none;
-  font-weight: 600;
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95rem;
 }
 
 .login-footer a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
+/* Media Queries Melhoradas */
 @media (max-width: 768px) {
-  .login-card {
-    padding: 2rem;
-    margin: 1rem;
-  }
+	.login-page {
+		padding: 1rem; /* Garantir margem em mobile */
+		align-items: flex-start; /* Alinhar ao topo em mobile */
+		padding-top: 2rem; /* Espaço no topo */
+	}
 
-  .login-header h1 {
-    font-size: 1.75rem;
-  }
+	.login-card {
+		padding: 2rem 1.5rem; /* Reduzido padding lateral */
+		margin: 0; /* Remover margin extra */
+		max-width: none; /* Remover limite máximo */
+		width: 100%;
+		box-shadow: var(--shadow);
+	}
+
+	.login-header {
+		margin-bottom: 1.5rem;
+	}
+
+	.login-header h1 {
+		font-size: 1.5rem; /* Menor em mobile */
+	}
+
+	.login-header p {
+		font-size: 0.9rem; /* Menor em mobile */
+	}
+
+	.form-group {
+		margin-bottom: 1rem;
+	}
+
+	.form-group input {
+		padding: 0.75rem; /* Menor em mobile */
+		font-size: 0.95rem;
+	}
+
+	.btn-login {
+		padding: 0.75rem; /* Menor em mobile */
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.login-page {
+		padding: 0.75rem;
+		padding-top: 1.5rem;
+	}
+
+	.login-card {
+		padding: 1.5rem 1.25rem; /* Ainda menor em telas pequenas */
+	}
+
+	.login-header h1 {
+		font-size: 1.375rem;
+	}
+
+	.login-header p {
+		font-size: 0.85rem;
+	}
+
+	.divider span {
+		font-size: 0.8rem;
+	}
+
+	.login-footer p,
+	.login-footer a {
+		font-size: 0.9rem;
+	}
+}
+
+/* Garantir que o Google Button também seja responsivo */
+.google-login-btn {
+	width: 100%;
+	box-sizing: border-box;
 }
