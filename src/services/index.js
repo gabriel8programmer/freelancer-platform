@@ -1,0 +1,10 @@
+// src/services/index.js
+export { default as authService } from './authService'
+export { default as userService } from './userService'
+export { default as projectService } from './projectService'
+export { default as proposalService } from './proposalService'
+export { default as reviewService } from './reviewService'
+export { default as dashboardService } from './dashboardService'
+export { default as skillService } from './skillService'
+export { default as paymentService } from './paymentService'
+export { default as api } from './api'

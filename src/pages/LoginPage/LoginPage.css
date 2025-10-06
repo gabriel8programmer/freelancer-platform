@@ -37,6 +37,72 @@
 	line-height: 1.4;
 }
 
+/* Botões de teste (apenas desenvolvimento) */
+.test-buttons {
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+	background: var(--light);
+	border-radius: var(--border-radius);
+	border: 1px dashed var(--primary);
+}
+
+.test-label {
+	text-align: center;
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
+	color: var(--gray);
+	font-weight: 500;
+}
+
+.test-buttons-group {
+	display: flex;
+	gap: 0.5rem;
+	justify-content: center;
+}
+
+.btn-test {
+	padding: 0.5rem 1rem;
+	font-size: 0.8rem;
+	border-color: var(--primary);
+	color: var(--primary);
+	background: transparent;
+	border: 1px solid;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: var(--transition);
+}
+
+.btn-test:hover:not(:disabled) {
+	background: var(--primary);
+	color: white;
+}
+
+.btn-test:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* Alertas */
+.alert {
+	padding: 0.75rem 1rem;
+	border-radius: var(--border-radius);
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+}
+
+.alert-error {
+	background: #fee;
+	border: 1px solid #fcc;
+	color: #c33;
+}
+
+.alert i {
+	font-size: 1rem;
+}
+
 .divider {
 	text-align: center;
 	margin: 1.5rem 0;
@@ -92,12 +158,39 @@
 	box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.1);
 }
 
+.form-group input:disabled {
+	background-color: var(--light-gray);
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
 .btn-login {
 	width: 100%;
 	padding: 0.875rem; /* Reduzido de 1rem */
 	font-size: 1rem; /* Reduzido de 1.1rem */
 	margin-top: 0.5rem;
 	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	border: none;
+	border-radius: var(--border-radius);
+	background: var(--primary);
+	color: white;
+	cursor: pointer;
+	transition: var(--transition);
+}
+
+.btn-login:hover:not(:disabled) {
+	background: var(--primary-dark);
+	transform: translateY(-1px);
+}
+
+.btn-login:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none;
 }
 
 .login-footer {
@@ -121,6 +214,20 @@
 
 .login-footer a:hover {
 	text-decoration: underline;
+}
+
+/* Loading spinner */
+.fa-spin {
+	animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
 /* Media Queries Melhoradas */
@@ -149,6 +256,14 @@
 
 	.login-header p {
 		font-size: 0.9rem; /* Menor em mobile */
+	}
+
+	.test-buttons-group {
+		flex-direction: column;
+	}
+
+	.btn-test {
+		width: 100%;
 	}
 
 	.form-group {
