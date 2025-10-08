@@ -63,11 +63,6 @@
 }
 
 @media (max-width: 768px) {
-  .register-card {
-    padding: 2rem;
-    margin: 1rem;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
   }
