@@ -23,10 +23,12 @@
 	color: var(--primary);
 	text-decoration: none;
 	z-index: 1001;
+	transition: var(--transition);
 }
 
 .logo:hover {
 	color: var(--primary-dark);
+	transform: translateY(-1px);
 }
 
 .logo i {
@@ -84,31 +86,75 @@
 .nav-btn.active {
 	background: var(--primary);
 	color: white;
+	transform: translateY(-1px);
 }
 
+/* BOTÃO PRINCIPAL MELHORADO */
 .btn {
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
 	background: var(--primary);
 	color: white;
-	padding: 0.75rem 1rem;
+	padding: 0.75rem 1.5rem;
 	cursor: pointer;
-	transition: var(--transition);
-	font-weight: 500;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	font-weight: 600;
 	white-space: nowrap;
-	width: 100%;
-	text-align: center;
 	font-size: 1rem;
-	border-radius: 1rem;
+	border-radius: 0.75rem;
 	text-decoration: none;
 	border: 2px solid var(--primary);
+	position: relative;
+	overflow: hidden;
+}
+
+.btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s ease;
 }
 
 .btn:hover {
+	background: var(--primary-dark);
+	color: white;
+	border-color: var(--primary-dark);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover::before {
+	left: 100%;
+}
+
+.btn:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Variações do botão */
+.btn-outline {
 	background: transparent;
 	color: var(--primary);
+	border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+	background: var(--primary);
+	color: white;
+	border-color: var(--primary);
+}
+
+.btn-small {
+	padding: 0.5rem 1rem;
+	font-size: 0.9rem;
+	border-radius: 0.5rem;
 }
 
 .mobile-menu-btn {
@@ -120,8 +166,14 @@
 	cursor: pointer;
 	padding: 0.5rem;
 	z-index: 1001;
-	/* Garantir que o botão fique no canto */
 	margin-left: auto;
+	transition: var(--transition);
+	border-radius: var(--border-radius);
+}
+
+.mobile-menu-btn:hover {
+	background: var(--light-gray);
+	transform: scale(1.05);
 }
 
 .user-actions {
@@ -149,6 +201,7 @@
 
 .user-info:hover {
 	background: var(--light-gray);
+	transform: translateY(-1px);
 }
 
 .user-avatar {
@@ -160,6 +213,12 @@
 	justify-content: center;
 	background: var(--light-gray);
 	border-radius: 50%;
+	transition: var(--transition);
+}
+
+.user-info:hover .user-avatar {
+	background: var(--primary);
+	color: white;
 }
 
 .user-name {
@@ -180,41 +239,51 @@
 .btn-logout:hover {
 	background: var(--light-gray);
 	color: var(--dark);
+	transform: translateY(-1px);
 }
 
-/* CORREÇÃO: Padding reduzido para os botões */
+/* Botões de auth melhorados */
 .btn-login,
 .btn-signup {
-	padding: 0.4rem 1rem; /* Reduzido o padding vertical */
-	border-radius: var(--border-radius);
+	padding: 0.5rem 1.25rem;
+	border-radius: 0.75rem;
 	border: none;
 	cursor: pointer;
 	font-weight: 500;
-	transition: var(--transition);
+	transition: all 0.3s ease;
 	font-size: 0.9rem;
 	text-decoration: none;
-	display: inline-block;
-	text-align: center;
-	line-height: 1.2; /* Melhor controle da altura */
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	line-height: 1.2;
 }
 
 .btn-login {
 	background: transparent;
 	color: var(--primary);
-	border: 1px solid var(--primary);
+	border: 2px solid var(--primary);
 }
 
 .btn-login:hover {
-	background: var(--light-gray);
+	background: var(--primary);
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .btn-signup {
 	background: var(--primary);
 	color: white;
+	border: 2px solid var(--primary);
 }
 
 .btn-signup:hover {
 	background: var(--primary-dark);
+	border-color: var(--primary-dark);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-user-actions {
@@ -230,6 +299,26 @@
 .btn-logout-mobile:hover {
 	background: #dc3545;
 	color: white;
+	transform: translateY(-1px);
+}
+
+/* Estados de foco para acessibilidade */
+.btn:focus-visible,
+.nav-btn:focus-visible,
+.mobile-menu-btn:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* Animações suaves para todos os elementos interativos */
+.btn,
+.nav-btn,
+.mobile-menu-btn,
+.user-info,
+.btn-login,
+.btn-signup,
+.btn-logout {
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (max-width: 768px) {
@@ -255,17 +344,22 @@
 		font-size: 1.2rem;
 	}
 
-	/* CORREÇÃO: Garantir que os elementos fiquem nos cantos */
 	.header-content {
 		position: relative;
 	}
 
 	.mobile-menu-btn {
-		order: 2; /* Forçar o botão para a direita */
+		order: 2;
 	}
 
 	.user-actions {
-		display: none; /* Esconder completamente no mobile */
+		display: none;
+	}
+
+	/* Ajustes para mobile */
+	.btn {
+		padding: 0.65rem 1.25rem;
+		font-size: 0.95rem;
 	}
 }
 
@@ -282,11 +376,16 @@
 		font-size: 1.5rem;
 	}
 
-	/* CORREÇÃO adicional: padding ainda menor para mobile */
 	.btn-login,
 	.btn-signup {
-		padding: 0.35rem 0.8rem;
+		padding: 0.4rem 1rem;
 		font-size: 0.85rem;
+	}
+
+	.btn {
+		padding: 0.6rem 1rem;
+		font-size: 0.9rem;
+		border-radius: 0.5rem;
 	}
 }
 
