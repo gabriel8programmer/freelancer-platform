@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 import SearchBar from '../../components/SearchBar/SearchBar'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+import Pagination from '../../components/Pagination/Pagination'
 import { useProjects } from '../../hooks/useProjects'
 import './ProjectsPage.css'
 
@@ -16,7 +17,8 @@ const ProjectsPage = () => {
     error,
     pagination,
     fetchProjects,
-    searchProjects
+    searchProjects,
+    changePage
   } = useProjects()
 
   // Carregar projetos quando o componente montar
@@ -51,6 +53,12 @@ const ProjectsPage = () => {
 
   const handleRefresh = () => {
     fetchProjects({ status: 'open', search: debouncedSearch })
+  }
+
+  const handlePageChange = (page) => {
+    changePage(page)
+    // Scroll para o topo quando mudar de página
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   if (error) {
@@ -124,6 +132,15 @@ const ProjectsPage = () => {
                 <ProjectCard key={project._id || project.id} project={project} />
               ))}
             </div>
+
+            {/* Paginação */}
+            {pagination.totalPages > 1 && (
+              <Pagination
+                currentPage={pagination.currentPage}
+                totalPages={pagination.totalPages}
+                onPageChange={handlePageChange}
+              />
+            )}
             
             {projects.length === 0 && !loading && (
               <div className="empty-state">

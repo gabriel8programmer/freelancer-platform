@@ -1,85 +1,87 @@
 /* index.css */
 /* Reset e estilos base */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 :root {
-  --primary: #4361ee;
-  --primary-dark: #3a56d4;
-  --secondary: #7209b7;
-  --accent: #f72585;
-  --light: #f8f9fa;
-  --dark: #212529;
-  --gray: #6c757d;
-  --light-gray: #e9ecef;
-  --success: #4cc9f0;
-  --border-radius: 12px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
-  --transition: all 0.3s ease;
+	--primary: #4361ee;
+	--primary-dark: #3a56d4;
+	--secondary: #7209b7;
+	--accent: #f72585;
+	--danger: #dc3545;
+	--danger-dark: #c82333;
+	--light: #f8f9fa;
+	--dark: #212529;
+	--gray: #6c757d;
+	--light-gray: #e9ecef;
+	--success: #4cc9f0;
+	--border-radius: 12px;
+	--shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	--shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+	--transition: all 0.3s ease;
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: var(--dark);
-  background-color: #f5f7ff;
-  overflow-x: hidden;
+	font-family: Roboto, Tahoma, Geneva, Verdana, sans-serif;
+	line-height: 1.6;
+	color: var(--dark);
+	background-color: #f5f7ff;
+	overflow-x: hidden;
 }
 
 #root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 }
 
 /* Scrollbar personalizada */
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--light-gray);
+	background: var(--light-gray);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 4px;
+	background: var(--primary);
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-dark);
+	background: var(--primary-dark);
 }
 
 /* Seleção de texto */
 ::selection {
-  background: var(--primary);
-  color: white;
+	background: var(--primary);
+	color: white;
 }
 
 /* Foco acessível */
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 2px;
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
 }
 
 /* Animações base */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-out;
+	animation: fadeIn 0.5s ease-out;
 }

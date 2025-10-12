@@ -1,0 +1,268 @@
+/* components/HeroSection/HeroSection.module.css */
+.hero {
+	background: linear-gradient(135deg, #4361ee 0%, #7209b7 100%);
+	color: white;
+	padding: 4rem 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.heroContent {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 3rem;
+	align-items: center;
+	position: relative;
+	z-index: 2;
+}
+
+.heroText {
+	/* Container para o texto */
+}
+
+.heroTitle {
+	font-size: 3rem;
+	line-height: 1.2;
+	margin-bottom: 1.5rem;
+	font-weight: 700;
+}
+
+.highlight {
+	color: #f72585;
+	position: relative;
+}
+
+.highlight::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 4px;
+	background: #f72585;
+	border-radius: 2px;
+}
+
+.heroDescription {
+	font-size: 1.25rem;
+	margin-bottom: 2rem;
+	opacity: 0.9;
+	line-height: 1.6;
+}
+
+.heroButtons {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 3rem;
+	flex-wrap: wrap;
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 1rem 2rem;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 0.3s ease;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+.btnPrimary {
+	background: #f72585;
+	color: white;
+}
+
+.btnPrimary:hover {
+	background: #e11574;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(247, 37, 133, 0.4);
+}
+
+.btnSecondary {
+	background: transparent;
+	color: white;
+	border: 2px solid white;
+}
+
+.btnSecondary:hover {
+	background: white;
+	color: #4361ee;
+	transform: translateY(-2px);
+}
+
+.heroStats {
+	display: flex;
+	gap: 2rem;
+}
+
+.stat {
+	display: flex;
+	flex-direction: column;
+}
+
+.stat strong {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.stat span {
+	font-size: 0.9rem;
+	opacity: 0.8;
+}
+
+.heroVisual {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 400px;
+}
+
+.floatingCard {
+	position: absolute;
+	background: rgba(255, 255, 255, 0.15);
+	backdrop-filter: blur(10px);
+	padding: 1.5rem;
+	border-radius: 12px;
+	text-align: center;
+	width: 140px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	transition: all 0.3s ease;
+}
+
+.floatingCard:hover {
+	transform: scale(1.05);
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.floatingCard i {
+	font-size: 2.5rem;
+	margin-bottom: 0.75rem;
+	display: block;
+}
+
+.floatingCard span {
+	font-weight: 600;
+	font-size: 0.9rem;
+}
+
+.floatingCardDesign {
+	top: 20%;
+	left: 10%;
+	animation: float 3s ease-in-out infinite;
+}
+
+.floatingCardDevelopment {
+	top: 50%;
+	right: 20%;
+	animation: float 3s ease-in-out infinite 0.5s;
+}
+
+.floatingCardMarketing {
+	bottom: 10%;
+	left: 30%;
+	animation: float 3s ease-in-out infinite 1s;
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0) rotate(0deg);
+	}
+	50% {
+		transform: translateY(-20px) rotate(2deg);
+	}
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+	.heroContent {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+		text-align: center;
+	}
+
+	.heroTitle {
+		font-size: 2.5rem;
+	}
+
+	.heroVisual {
+		height: 300px;
+	}
+
+	.heroStats {
+		justify-content: center;
+	}
+}
+
+@media (max-width: 768px) {
+	.hero {
+		padding: 3rem 0;
+	}
+
+	.heroTitle {
+		font-size: 2rem;
+	}
+
+	.heroDescription {
+		font-size: 1.1rem;
+	}
+
+	.heroButtons {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.btn {
+		width: 100%;
+		max-width: 300px;
+		justify-content: center;
+	}
+
+	.heroStats {
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.floatingCard {
+		width: 120px;
+		padding: 1rem;
+	}
+
+	.floatingCard i {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero {
+		padding: 2rem 0;
+	}
+
+	.heroTitle {
+		font-size: 1.75rem;
+	}
+
+	.heroVisual {
+		height: 250px;
+	}
+
+	.floatingCard {
+		width: 100px;
+		padding: 0.75rem;
+	}
+
+	.floatingCard i {
+		font-size: 1.5rem;
+	}
+
+	.floatingCard span {
+		font-size: 0.8rem;
+	}
+}

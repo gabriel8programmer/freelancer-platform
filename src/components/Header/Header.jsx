@@ -1,14 +1,28 @@
 // components/Header/Header.jsx
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import './Header.css'
+import styles from './Header.module.css'
 
 const Header = () => {
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, user, logout } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const dropdownRef = useRef(null)
+
+  // Fechar dropdown quando clicar fora
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setUserDropdownOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   // Determina a tab ativa baseada na URL atual
   const getActiveTab = () => {
@@ -17,6 +31,8 @@ const Header = () => {
     if (path === '/projetos') return 'projects'
     if (path === '/freelancers') return 'freelancers'
     if (path === '/publicar') return 'post'
+    if (path === '/perfil') return 'profile'
+    if (path === '/meus-projetos') return 'my-projects'
     return 'home'
   }
 
@@ -38,23 +54,43 @@ const Header = () => {
     logout()
     navigate('/')
     setMobileMenuOpen(false)
+    setUserDropdownOpen(false)
+  }
+
+  const toggleUserDropdown = () => {
+    setUserDropdownOpen(!userDropdownOpen)
+  }
+
+  // Obter avatar do usuário ou usar placeholder
+  const getUserAvatar = () => {
+    if (user?.avatar) {
+      return user.avatar
+    }
+    // Avatar placeholder baseado no nome
+    const userName = user?.name || 'Usuário'
+    return `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=4361ee&color=fff&size=128`
+  }
+
+  // Obter nome de exibição
+  const getDisplayName = () => {
+    return user?.name || user?.username || 'Usuário'
   }
 
   return (
-    <header className="header">
+    <header className={styles.header}>
       <div className="container">
-        <div className="header-content">
-          <Link to="/" className="logo">
+        <div className={styles.headerContent}>
+          <Link to="/" className={styles.logo}>
             <i className="fas fa-rocket"></i>
             <span>FreeLancerHub</span>
           </Link>
 
-          {/*Desktop Navigation*/}
-          <nav className="nav-desktop">
+          {/* Desktop Navigation */}
+          <nav className={styles.navDesktop}>
             {navItems.map(item => (
               <button
                 key={item.key}
-                className={`nav-btn ${activeTab === item.key ? 'active' : ''}`}
+                className={`${styles.navBtn} ${activeTab === item.key ? styles.active : ''}`}
                 onClick={() => handleNavClick(item.path)}
               >
                 <i className={item.icon}></i>
@@ -63,72 +99,188 @@ const Header = () => {
             ))}
           </nav>
           
-          {/* Mobile Menu Button*/}
+          {/* User Actions */}
+          <div className={styles.userActions}>
+            {!isAuthenticated ? (
+              <div className={styles.authButtons}>
+                <Link to="/login" className={styles.btnLogin}>
+                  <i className="fas fa-sign-in-alt"></i>
+                  Entrar
+                </Link>
+                <Link to="/cadastro" className={styles.btnSignup}>
+                  <i className="fas fa-user-plus"></i>
+                  Cadastrar
+                </Link>
+              </div>
+            ) : (
+              <div className={styles.userMenuWrapper} ref={dropdownRef}>
+                <button 
+                  className={styles.userProfileBtn}
+                  onClick={toggleUserDropdown}
+                  aria-expanded={userDropdownOpen}
+                  aria-haspopup="true"
+                >
+                  <img 
+                    src={getUserAvatar()} 
+                    alt={getDisplayName()}
+                    className={styles.userAvatar}
+                  />
+                  <span className={styles.userName}>{getDisplayName()}</span>
+                  <i className={`fas fa-chevron-${userDropdownOpen ? 'up' : 'down'} ${styles.dropdownArrow}`}></i>
+                </button>
+
+                {/* User Dropdown */}
+                {userDropdownOpen && (
+                  <div className={styles.userDropdown}>
+                    <div className={styles.dropdownHeader}>
+                      <img 
+                        src={getUserAvatar()} 
+                        alt={getDisplayName()}
+                        className={styles.dropdownAvatar}
+                      />
+                      <div className={styles.dropdownUserInfo}>
+                        <strong>{getDisplayName()}</strong>
+                        <span>{user?.email}</span>
+                      </div>
+                    </div>
+                    
+                    <div className={styles.dropdownDivider}></div>
+                    
+                    <Link 
+                      to="/perfil" 
+                      className={styles.dropdownItem}
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <i className="fas fa-user"></i>
+                      Meu Perfil
+                    </Link>
+                    
+                    <Link 
+                      to="/meus-projetos" 
+                      className={styles.dropdownItem}
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <i className="fas fa-briefcase"></i>
+                      Meus Projetos
+                    </Link>
+                    
+                    <Link 
+                      to="/configuracoes" 
+                      className={styles.dropdownItem}
+                      onClick={() => setUserDropdownOpen(false)}
+                    >
+                      <i className="fas fa-cog"></i>
+                      Configurações
+                    </Link>
+
+                    <div className={styles.dropdownDivider}></div>
+                    
+                    <button 
+                      className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
+                      onClick={handleLogout}
+                    >
+                      <i className="fas fa-sign-out-alt"></i>
+                      Sair
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
           <button 
-            className="mobile-menu-btn"
+            className={styles.mobileMenuBtn}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Menu mobile"
           >
             <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
           </button>
-
-         <div className='nav-desktop'>
-           <Link to="/login" className='btn'>Entrar</Link>
-           <Link to="/cadastro" className='btn'>Cadastrar</Link>
-         </div>
         </div>
 
-        {/* Mobile Navigation*/}
-        <nav className={`nav-mobile ${mobileMenuOpen ? 'open' : ''}`}>
+        {/* Mobile Navigation */}
+        <nav className={`${styles.navMobile} ${mobileMenuOpen ? styles.open : ''}`}>
           {navItems.map(item => (
             <button
               key={item.key}
-              className={`nav-btn ${activeTab === item.key ? 'active' : ''}`}
+              className={`${styles.navBtn} ${activeTab === item.key ? styles.active : ''}`}
               onClick={() => handleNavClick(item.path)}
             >
               <i className={item.icon}></i>
               {item.label}
             </button>
           ))}
-          {/* Adicionar opções de usuário no mobile */}
-        {isAuthenticated ? (
-        <div className="mobile-user-actions">
-          <Link 
-            to="/perfil" 
-            className="nav-btn"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <i className="fas fa-user"></i>
-            Meu Perfil
-          </Link>
-          <button 
-            className="nav-btn btn-logout-mobile"
-            onClick={handleLogout}
-          >
-            <i className="fas fa-sign-out-alt"></i>
-            Sair
-          </button>
-        </div>
-        ) : (
-        <div className="mobile-user-actions">
-          <Link 
-            to="/login" 
-            className="nav-btn"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <i className="fas fa-sign-in-alt"></i>
-            Entrar
-          </Link>
-          <Link 
-            to="/cadastro" 
-            className="nav-btn"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            <i className="fas fa-user-plus"></i>
-            Cadastrar
-          </Link>
-        </div>
-        )}
+          
+          {/* Mobile User Actions */}
+          {isAuthenticated ? (
+            <div className={styles.mobileUserActions}>
+              <div className={styles.mobileUserInfo}>
+                <img 
+                  src={getUserAvatar()} 
+                  alt={getDisplayName()}
+                  className={styles.mobileUserAvatar}
+                />
+                <div className={styles.mobileUserDetails}>
+                  <strong>{getDisplayName()}</strong>
+                  <span>{user?.email}</span>
+                </div>
+              </div>
+              
+              <Link 
+                to="/perfil" 
+                className={styles.navBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <i className="fas fa-user"></i>
+                Meu Perfil
+              </Link>
+              
+              <Link 
+                to="/meus-projetos" 
+                className={styles.navBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <i className="fas fa-briefcase"></i>
+                Meus Projetos
+              </Link>
+              
+              <Link 
+                to="/configuracoes" 
+                className={styles.navBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <i className="fas fa-cog"></i>
+                Configurações
+              </Link>
+              
+              <button 
+                className={`${styles.navBtn} ${styles.btnLogoutMobile}`}
+                onClick={handleLogout}
+              >
+                <i className="fas fa-sign-out-alt"></i>
+                Sair
+              </button>
+            </div>
+          ) : (
+            <div className={styles.mobileUserActions}>
+              <Link 
+                to="/login" 
+                className={styles.navBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <i className="fas fa-sign-in-alt"></i>
+                Entrar
+              </Link>
+              <Link 
+                to="/cadastro" 
+                className={styles.navBtn}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <i className="fas fa-user-plus"></i>
+                Cadastrar
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
     </header>

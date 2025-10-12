@@ -1,5 +1,5 @@
 // components/ProjectCard/ProjectCard.jsx
-import './ProjectCard.css'
+import styles from './ProjectCard.module.css'
 
 const ProjectCard = ({ project }) => {
   // Formatar orçamento
@@ -56,80 +56,111 @@ const ProjectCard = ({ project }) => {
   // Verificar se é para mostrar botão de proposta
   const showApplyButton = project.status === 'open'
 
+  // Obter classe do status
+  const getStatusClass = () => {
+    switch (project.status) {
+      case 'open':
+        return styles.statusOpen
+      case 'in_progress':
+        return styles.statusInProgress
+      case 'completed':
+        return styles.statusCompleted
+      case 'cancelled':
+        return styles.statusCancelled
+      default:
+        return styles.statusOpen
+    }
+  }
+
+  // Obter texto do status
+  const getStatusText = () => {
+    switch (project.status) {
+      case 'open':
+        return 'Aberto'
+      case 'in_progress':
+        return 'Em Andamento'
+      case 'completed':
+        return 'Concluído'
+      case 'cancelled':
+        return 'Cancelado'
+      default:
+        return 'Aberto'
+    }
+  }
+
   return (
-    <div className="project-card">
-      <div className="project-header">
-        <h3 className="project-title">{project.title}</h3>
-        <span className={`status-badge status-${project.status || 'open'}`}>
-          {project.status === 'open' && 'Aberto'}
-          {project.status === 'in_progress' && 'Em Andamento'}
-          {project.status === 'completed' && 'Concluído'}
-          {project.status === 'cancelled' && 'Cancelado'}
+    <div className={styles.projectCard}>
+      <div className={styles.projectHeader}>
+        <h3 className={styles.projectTitle}>{project.title}</h3>
+        <span className={`${styles.statusBadge} ${getStatusClass()}`}>
+          {getStatusText()}
         </span>
       </div>
 
-      <div className="project-category">
+      <div className={styles.projectCategory}>
         <i className="fas fa-folder"></i>
         <span>{project.category || 'Outro'}</span>
       </div>
       
-      <p className="project-description">
+      <p className={styles.projectDescription}>
         {project.description && project.description.length > 150 
           ? `${project.description.substring(0, 150)}...` 
           : project.description
         }
       </p>
       
-      <div className="project-client">
+      <div className={styles.projectClient}>
         <i className="fas fa-user"></i>
         <span>{getClientName()}</span>
       </div>
 
-      <div className="project-timeline">
+      <div className={styles.projectTimeline}>
         <i className="fas fa-clock"></i>
         <span>Prazo: {project.timeline || 'A combinar'}</span>
       </div>
       
-      <div className="project-skills">
+      <div className={styles.projectSkills}>
         {project.skills && project.skills.slice(0, 4).map((skill, index) => (
-          <span key={index} className="skill-tag">{skill}</span>
+          <span key={index} className={styles.skillTag}>{skill}</span>
         ))}
         {project.skills && project.skills.length > 4 && (
-          <span className="skill-tag more-skills">+{project.skills.length - 4}</span>
+          <span className={`${styles.skillTag} ${styles.moreSkills}`}>
+            +{project.skills.length - 4}
+          </span>
         )}
         {(!project.skills || project.skills.length === 0) && (
-          <span className="skill-tag no-skills">Sem habilidades definidas</span>
+          <span className={`${styles.skillTag} ${styles.noSkills}`}>
+            Sem habilidades definidas
+          </span>
         )}
       </div>
       
-      <div className="project-footer">
-        <div className="project-meta">
-          <span className="posted-time">
+      <div className={styles.projectFooter}>
+        <div className={styles.projectMeta}>
+          <span className={styles.postedTime}>
             <i className="fas fa-calendar"></i>
             {formatDate(project.createdAt || project.posted)}
           </span>
-          <span className="proposals">
+          <span className={styles.proposals}>
             <i className="fas fa-paper-plane"></i>
             {getProposalsCount()} proposta{getProposalsCount() !== 1 ? 's' : ''}
           </span>
-          <span className="budget">
+          <span className={styles.budget}>
             <i className="fas fa-money-bill-wave"></i>
             {formatBudget()}
           </span>
         </div>
         
         {showApplyButton && (
-          <button className="btn-apply">
+          <button className={styles.btnApply}>
             <i className="fas fa-paper-plane"></i>
             Enviar Proposta
           </button>
         )}
         
         {!showApplyButton && (
-          <button className="btn-apply disabled" disabled>
-            {project.status === 'in_progress' && 'Em Andamento'}
-            {project.status === 'completed' && 'Concluído'}
-            {project.status === 'cancelled' && 'Cancelado'}
+          <button className={`${styles.btnApply} ${styles.btnApplyDisabled}`} disabled>
+            {getStatusText()}
           </button>
         )}
       </div>
