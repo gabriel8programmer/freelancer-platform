@@ -1,9 +1,8 @@
-// src/pages/RegisterPage/RegisterPage.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import GoogleLoginButton from '../../components/GoogleLoginButton/GoogleLoginButton';
-import './RegisterPage.css';
+import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -58,22 +57,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="register-page">
+    <div className={styles.registerPage}>
       <div className="container">
-        <div className="register-card">
-          <div className="register-header">
+        <div className={styles.registerCard}>
+          <div className={styles.registerHeader}>
             <h1>Criar Conta</h1>
             <p>Junte-se à nossa comunidade de freelancers</p>
           </div>
 
           <GoogleLoginButton onSuccess={handleGoogleSuccess} />
 
-          <div className="divider">
+          <div className={styles.divider}>
             <span>ou cadastre-se com email</span>
           </div>
 
-          <form className="register-form" onSubmit={handleSubmit}>
-            <div className="form-group">
+          <form className={styles.registerForm} onSubmit={handleSubmit}>
+            <div className={styles.formGroup}>
               <label htmlFor="name">Nome Completo</label>
               <input
                 type="text"
@@ -86,7 +85,7 @@ const RegisterPage = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -99,7 +98,7 @@ const RegisterPage = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="userType">Tipo de Usuário</label>
               <select
                 id="userType"
@@ -113,8 +112,8 @@ const RegisterPage = () => {
               </select>
             </div>
 
-            <div className="form-row">
-              <div className="form-group">
+            <div className={styles.formRow}>
+              <div className={styles.formGroup}>
                 <label htmlFor="password">Senha</label>
                 <input
                   type="password"
@@ -127,7 +126,7 @@ const RegisterPage = () => {
                 />
               </div>
 
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label htmlFor="confirmPassword">Confirmar Senha</label>
                 <input
                   type="password"
@@ -143,14 +142,14 @@ const RegisterPage = () => {
 
             <button 
               type="submit" 
-              className="btn btn-primary btn-register"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnRegister}`}
               disabled={isLoading}
             >
               {isLoading ? 'Criando conta...' : 'Criar Conta'}
             </button>
           </form>
 
-          <div className="register-footer">
+          <div className={styles.registerFooter}>
             <p>
               Já tem uma conta? <Link to="/login">Faça login</Link>
             </p>

@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import GoogleLoginButton from '../../components/GoogleLoginButton/GoogleLoginButton';
 import { authService } from '../../services';
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -146,10 +146,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-page">
+    <div className={styles.loginPage}>
       <div className="container">
-        <div className="login-card">
-          <div className="login-header">
+        <div className={styles.loginCard}>
+          <div className={styles.loginHeader}>
             <h1>Entrar no FreeLancerHub</h1>
             <p>Encontre os melhores projetos e mostre seu talento</p>
           </div>
@@ -178,12 +178,12 @@ const LoginPage = () => {
 
           {/* Botões de teste (apenas desenvolvimento) */}
           {import.meta.env.VITE_NODE_ENV === 'development' && (
-            <div className="test-buttons">
-              <p className="test-label">Dados de teste:</p>
-              <div className="test-buttons-group">
+            <div className={styles.testButtons}>
+              <p className={styles.testLabel}>Dados de teste:</p>
+              <div className={styles.testButtonsGroup}>
                 <button 
                   type="button"
-                  className="btn btn-outline btn-test"
+                  className={`${styles.btn} ${styles.btnOutline} ${styles.btnTest}`}
                   onClick={() => fillTestCredentials('freelancer')}
                   disabled={isLoading}
                 >
@@ -191,7 +191,7 @@ const LoginPage = () => {
                 </button>
                 <button 
                   type="button"
-                  className="btn btn-outline btn-test"
+                  className={`${styles.btn} ${styles.btnOutline} ${styles.btnTest}`}
                   onClick={() => fillTestCredentials('client')}
                   disabled={isLoading}
                 >
@@ -210,13 +210,13 @@ const LoginPage = () => {
             disabled={isLoading}
           />
 
-          <div className="divider">
+          <div className={styles.divider}>
             <span>ou entre com email</span>
           </div>
 
-          <form className="login-form" onSubmit={handleSubmit}>
+          <form className={styles.loginForm} onSubmit={handleSubmit}>
             {error && (
-              <div className="alert alert-error">
+              <div className={`${styles.alert} ${styles.alertError}`}>
                 <i className="fas fa-exclamation-circle"></i>
                 <div>
                   <strong>Erro no login:</strong>
@@ -225,7 +225,7 @@ const LoginPage = () => {
               </div>
             )}
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -239,7 +239,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="password">Senha</label>
               <input
                 type="password"
@@ -255,7 +255,7 @@ const LoginPage = () => {
 
             <button 
               type="submit" 
-              className="btn btn-primary btn-login"
+              className={`${styles.btn} ${styles.btnPrimary} ${styles.btnLogin}`}
               disabled={isLoading}
             >
               {isLoading ? (
@@ -272,7 +272,7 @@ const LoginPage = () => {
             </button>
           </form>
 
-          <div className="login-footer">
+          <div className={styles.loginFooter}>
             <p>
               Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
             </p>

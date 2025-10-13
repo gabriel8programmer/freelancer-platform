@@ -1,6 +1,6 @@
 // pages/PostProjectPage/PostProjectPage.jsx
 import React, { useState } from 'react'
-import './PostProjectPage.css'
+import styles from './PostProjectPage.module.css'
 
 const PostProjectPage = () => {
   const [formData, setFormData] = useState({
@@ -47,18 +47,18 @@ const PostProjectPage = () => {
   }
 
   return (
-    <div className="post-project-page fade-in">
+    <div className={`${styles.postProjectPage} ${styles.fadeIn}`}>
       <div className="container">
-        <div className="page-header">
+        <div className={styles.pageHeader}>
           <h1>Publicar Novo Projeto</h1>
           <p>Descreva seu projeto para encontrar o freelancer perfeito</p>
         </div>
         
-        <form className="project-form" onSubmit={handleSubmit}>
-          <div className="form-section">
+        <form className={styles.projectForm} onSubmit={handleSubmit}>
+          <div className={styles.formSection}>
             <h3>Informações Básicas</h3>
             
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="title">Título do Projeto *</label>
               <input
                 type="text"
@@ -71,7 +71,7 @@ const PostProjectPage = () => {
               />
             </div>
             
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="category">Categoria *</label>
               <select
                 id="category"
@@ -87,7 +87,7 @@ const PostProjectPage = () => {
               </select>
             </div>
             
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="description">Descrição Detalhada *</label>
               <textarea
                 id="description"
@@ -101,11 +101,11 @@ const PostProjectPage = () => {
             </div>
           </div>
           
-          <div className="form-section">
+          <div className={styles.formSection}>
             <h3>Detalhes do Projeto</h3>
             
-            <div className="form-row">
-              <div className="form-group">
+            <div className={styles.formRow}>
+              <div className={styles.formGroup}>
                 <label htmlFor="budget">Orçamento (R$) *</label>
                 <input
                   type="text"
@@ -118,7 +118,7 @@ const PostProjectPage = () => {
                 />
               </div>
               
-              <div className="form-group">
+              <div className={styles.formGroup}>
                 <label htmlFor="timeline">Prazo Estimado *</label>
                 <input
                   type="text"
@@ -132,7 +132,7 @@ const PostProjectPage = () => {
               </div>
             </div>
             
-            <div className="form-group">
+            <div className={styles.formGroup}>
               <label htmlFor="skills">Habilidades Necessárias *</label>
               <input
                 type="text"
@@ -147,7 +147,7 @@ const PostProjectPage = () => {
             </div>
           </div>
           
-          <button type="submit" className="btn btn-primary btn-publish">
+          <button type="submit" className={`${styles.btn} ${styles.btnPrimary} ${styles.btnPublish}`}>
             <i className="fas fa-paper-plane"></i>
             Publicar Projeto
           </button>
