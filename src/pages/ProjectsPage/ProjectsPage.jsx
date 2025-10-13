@@ -5,7 +5,7 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import Pagination from '../../components/Pagination/Pagination'
 import { useProjects } from '../../hooks/useProjects'
-import './ProjectsPage.css'
+import styles from './ProjectsPage.module.css'
 
 const ProjectsPage = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -63,14 +63,14 @@ const ProjectsPage = () => {
 
   if (error) {
     return (
-      <div className="projects-page fade-in">
+      <div className={`${styles.projectsPage} ${styles.fadeIn}`}>
         <div className="container">
-          <div className="error-state">
+          <div className={styles.errorState}>
             <i className="fas fa-exclamation-triangle"></i>
             <h3>Erro ao carregar projetos</h3>
             <p>{error}</p>
             <button 
-              className="btn btn-primary"
+              className={`${styles.btn} ${styles.btnPrimary}`}
               onClick={handleRefresh}
             >
               Tentar Novamente
@@ -82,16 +82,16 @@ const ProjectsPage = () => {
   }
 
   return (
-    <div className="projects-page fade-in">
+    <div className={`${styles.projectsPage} ${styles.fadeIn}`}>
       <div className="container">
-        <div className="page-header">
-          <div className="header-row">
+        <div className={styles.pageHeader}>
+          <div className={styles.headerRow}>
             <div>
               <h1>Projetos Disponíveis</h1>
               <p>Encontre oportunidades que combinam com suas habilidades</p>
             </div>
             <button 
-              className="btn btn-outline refresh-btn"
+              className={`${styles.btn} ${styles.btnOutline} ${styles.refreshBtn}`}
               onClick={handleRefresh}
               disabled={loading}
             >
@@ -101,7 +101,7 @@ const ProjectsPage = () => {
           </div>
         </div>
         
-        <div className="search-section">
+        <div className={styles.searchSection}>
           <SearchBar 
             placeholder="Buscar projetos por título, descrição ou habilidades..."
             onSearch={handleSearch}
@@ -114,20 +114,20 @@ const ProjectsPage = () => {
         
         {!loading && (
           <>
-            <div className="results-info">
+            <div className={styles.resultsInfo}>
               <span>
                 {pagination.total} projeto{pagination.total !== 1 ? 's' : ''} encontrado{pagination.total !== 1 ? 's' : ''}
                 {debouncedSearch && ` para "${debouncedSearch}"`}
               </span>
               
               {pagination.totalPages > 1 && (
-                <span className="page-info">
+                <span className={styles.pageInfo}>
                   Página {pagination.currentPage} de {pagination.totalPages}
                 </span>
               )}
             </div>
             
-            <div className="projects-grid">
+            <div className={styles.projectsGrid}>
               {projects.map(project => (
                 <ProjectCard key={project._id || project.id} project={project} />
               ))}
@@ -143,7 +143,7 @@ const ProjectsPage = () => {
             )}
             
             {projects.length === 0 && !loading && (
-              <div className="empty-state">
+              <div className={styles.emptyState}>
                 <i className="fas fa-search"></i>
                 <h3>
                   {debouncedSearch ? 'Nenhum projeto encontrado' : 'Nenhum projeto disponível'}
@@ -155,7 +155,7 @@ const ProjectsPage = () => {
                   }
                 </p>
                 <button 
-                  className="btn btn-outline"
+                  className={`${styles.btn} ${styles.btnOutline}`}
                   onClick={handleRefresh}
                 >
                   <i className="fas fa-sync-alt"></i>

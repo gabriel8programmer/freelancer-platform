@@ -5,7 +5,7 @@ import SearchBar from '../../components/SearchBar/SearchBar'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import Pagination from '../../components/Pagination/Pagination'
 import { useFreelancers } from '../../hooks/useFreelancers'
-import './FreelancersPage.css'
+import styles from './FreelancersPage.module.css'
 
 const FreelancersPage = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -63,14 +63,14 @@ const FreelancersPage = () => {
 
   if (error) {
     return (
-      <div className="freelancers-page fade-in">
+      <div className={`${styles.freelancersPage} ${styles.fadeIn}`}>
         <div className="container">
-          <div className="error-state">
+          <div className={styles.errorState}>
             <i className="fas fa-exclamation-triangle"></i>
             <h3>Erro ao carregar freelancers</h3>
             <p>{error}</p>
             <button 
-              className="btn btn-primary"
+              className={`${styles.btn} ${styles.btnPrimary}`}
               onClick={handleRefresh}
             >
               Tentar Novamente
@@ -82,16 +82,16 @@ const FreelancersPage = () => {
   }
 
   return (
-    <div className="freelancers-page fade-in">
+    <div className={`${styles.freelancersPage} ${styles.fadeIn}`}>
       <div className="container">
-        <div className="page-header">
-          <div className="header-row">
+        <div className={styles.pageHeader}>
+          <div className={styles.headerRow}>
             <div>
               <h1>Freelancers Talentosos</h1>
               <p>Encontre o profissional perfeito para seu projeto</p>
             </div>
             <button 
-              className="btn btn-outline refresh-btn"
+              className={`${styles.btn} ${styles.btnOutline} ${styles.refreshBtn}`}
               onClick={handleRefresh}
               disabled={loading}
             >
@@ -101,7 +101,7 @@ const FreelancersPage = () => {
           </div>
         </div>
         
-        <div className="search-section">
+        <div className={styles.searchSection}>
           <SearchBar 
             placeholder="Buscar freelancers por nome, título ou habilidades..."
             onSearch={handleSearch}
@@ -114,20 +114,20 @@ const FreelancersPage = () => {
         
         {!loading && (
           <>
-            <div className="results-info">
+            <div className={styles.resultsInfo}>
               <span>
                 {pagination.total} freelancer{pagination.total !== 1 ? 's' : ''} encontrado{pagination.total !== 1 ? 's' : ''}
                 {debouncedSearch && ` para "${debouncedSearch}"`}
               </span>
               
               {pagination.totalPages > 1 && (
-                <span className="page-info">
+                <span className={styles.pageInfo}>
                   Página {pagination.currentPage} de {pagination.totalPages}
                 </span>
               )}
             </div>
             
-            <div className="freelancers-grid">
+            <div className={styles.freelancersGrid}>
               {freelancers.map(freelancer => (
                 <FreelancerCard key={freelancer._id || freelancer.id} freelancer={freelancer} />
               ))}
@@ -143,7 +143,7 @@ const FreelancersPage = () => {
             )}
             
             {freelancers.length === 0 && !loading && (
-              <div className="empty-state">
+              <div className={styles.emptyState}>
                 <i className="fas fa-users"></i>
                 <h3>
                   {debouncedSearch ? 'Nenhum freelancer encontrado' : 'Nenhum freelancer disponível'}
@@ -155,7 +155,7 @@ const FreelancersPage = () => {
                   }
                 </p>
                 <button 
-                  className="btn btn-outline"
+                  className={`${styles.btn} ${styles.btnOutline}`}
                   onClick={handleRefresh}
                 >
                   <i className="fas fa-sync-alt"></i>

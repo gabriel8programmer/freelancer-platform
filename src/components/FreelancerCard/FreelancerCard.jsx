@@ -1,5 +1,5 @@
 // components/FreelancerCard/FreelancerCard.jsx
-import './FreelancerCard.css'
+import styles from './FreelancerCard.module.css'
 
 const FreelancerCard = ({ freelancer }) => {
   // Formatar nome - usar name ou username
@@ -33,36 +33,40 @@ const FreelancerCard = ({ freelancer }) => {
   }
 
   return (
-    <div className="freelancer-card">
-      <div className="freelancer-header">
-        <div className="freelancer-avatar">
+    <div className={styles.freelancerCard}>
+      <div className={styles.freelancerHeader}>
+        <div className={styles.freelancerAvatar}>
           <img src={getAvatar()} alt={getDisplayName()} />
         </div>
-        <div className="freelancer-info">
-          <h3 className="freelancer-name">{getDisplayName()}</h3>
-          <p className="freelancer-title">{getTitle()}</p>
-          <div className="freelancer-rating">
+        <div className={styles.freelancerInfo}>
+          <h3 className={styles.freelancerName}>{getDisplayName()}</h3>
+          <p className={styles.freelancerTitle}>{getTitle()}</p>
+          <div className={styles.freelancerRating}>
             <i className="fas fa-star"></i>
             <span>{getRating().toFixed(1)}</span>
-            <span className="projects-count">({getCompletedProjects()} projetos)</span>
+            <span className={styles.projectsCount}>({getCompletedProjects()} projetos)</span>
           </div>
         </div>
       </div>
 
-      <div className="freelancer-skills">
+      <div className={styles.freelancerSkills}>
         {getSkills().slice(0, 4).map((skill, index) => (
-          <span key={index} className="skill-tag">{skill}</span>
+          <span key={index} className={styles.skillTag}>{skill}</span>
         ))}
         {getSkills().length > 4 && (
-          <span className="skill-tag more-skills">+{getSkills().length - 4}</span>
+          <span className={`${styles.skillTag} ${styles.moreSkills}`}>
+            +{getSkills().length - 4}
+          </span>
         )}
         {getSkills().length === 0 && (
-          <span className="skill-tag no-skills">Habilidades não informadas</span>
+          <span className={`${styles.skillTag} ${styles.noSkills}`}>
+            Habilidades não informadas
+          </span>
         )}
       </div>
 
-      <div className="freelancer-footer">
-        <button className="btn-view-profile">
+      <div className={styles.freelancerFooter}>
+        <button className={styles.btnViewProfile}>
           <i className="fas fa-eye"></i>
           Ver Perfil
         </button>

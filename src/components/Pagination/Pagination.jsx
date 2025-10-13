@@ -1,6 +1,6 @@
 // components/Pagination/Pagination.jsx
 import React from 'react'
-import './Pagination.css'
+import styles from './Pagination.module.css'
 
 const Pagination = ({ 
   currentPage, 
@@ -16,6 +16,10 @@ const Pagination = ({
     const range = []
     const rangeWithDots = []
 
+    // Sempre incluir primeira página
+    rangeWithDots.push(1)
+
+    // Calcular range de páginas ao redor da atual
     for (
       let i = Math.max(2, currentPage - delta);
       i <= Math.min(totalPages - 1, currentPage + delta);
@@ -24,17 +28,21 @@ const Pagination = ({
       range.push(i)
     }
 
+    // Adicionar ellipsis antes do range se necessário
     if (currentPage - delta > 2) {
-      rangeWithDots.push(1, '...')
-    } else {
-      rangeWithDots.push(1)
+      rangeWithDots.push('...')
     }
 
+    // Adicionar range de páginas
     rangeWithDots.push(...range)
 
+    // Adicionar ellipsis depois do range se necessário
     if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push('...', totalPages)
-    } else {
+      rangeWithDots.push('...')
+    }
+
+    // Sempre incluir última página se houver mais de uma página
+    if (totalPages > 1) {
       rangeWithDots.push(totalPages)
     }
 
@@ -43,13 +51,22 @@ const Pagination = ({
 
   const visiblePages = getVisiblePages()
 
+  // CORREÇÃO: Função para verificar se a página está ativa
+  const isPageActive = (page) => {
+    return currentPage === page
+  }
+
+  // CORREÇÃO: Função para verificar se o botão está desabilitado
+  const isPreviousDisabled = currentPage === 1
+  const isNextDisabled = currentPage === totalPages
+
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       {showNavigation && (
         <button
-          className={`pagination-btn ${currentPage === 1 ? 'disabled' : ''}`}
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          className={`${styles.paginationBtn} ${isPreviousDisabled ? styles.paginationBtnDisabled : ''}`}
+          onClick={() => !isPreviousDisabled && onPageChange(currentPage - 1)}
+          disabled={isPreviousDisabled}
         >
           <i className="fas fa-chevron-left"></i>
           <span>Anterior</span>
@@ -57,14 +74,14 @@ const Pagination = ({
       )}
 
       {showNumbers && (
-        <div className="pagination-numbers">
+        <div className={styles.paginationNumbers}>
           {visiblePages.map((page, index) => (
             <React.Fragment key={index}>
               {page === '...' ? (
-                <span className="pagination-ellipsis">...</span>
+                <span className={styles.paginationEllipsis}>...</span>
               ) : (
                 <button
-                  className={`pagination-number ${currentPage === page ? 'active' : ''}`}
+                  className={`${styles.paginationNumber} ${isPageActive(page) ? styles.paginationNumberActive : ''}`}
                   onClick={() => onPageChange(page)}
                 >
                   {page}
@@ -77,9 +94,9 @@ const Pagination = ({
 
       {showNavigation && (
         <button
-          className={`pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`}
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          className={`${styles.paginationBtn} ${isNextDisabled ? styles.paginationBtnDisabled : ''}`}
+          onClick={() => !isNextDisabled && onPageChange(currentPage + 1)}
+          disabled={isNextDisabled}
         >
           <span>Próxima</span>
           <i className="fas fa-chevron-right"></i>
