@@ -1,59 +1,59 @@
 // src/components/ProfileView/ProfileView.jsx
 import React from 'react';
-import './ProfileView.css';
+import styles from './ProfileView.module.css';
 
 const ProfileView = ({ user }) => {
   return (
-    <div className="profile-view">
-      <div className="profile-card">
-        <div className="profile-section">
+    <div className={styles.profileView}>
+      <div className={styles.profileCard}>
+        <div className={styles.profileSection}>
           <h3>Sobre</h3>
-          <p className="profile-bio">
+          <p className={styles.profileBio}>
             {user?.bio || 'Complete seu perfil para contar mais sobre você.'}
           </p>
         </div>
 
-        <div className="profile-section">
+        <div className={styles.profileSection}>
           <h3>Informações Profissionais</h3>
-          <div className="info-grid">
-            <div className="info-item">
+          <div className={styles.infoGrid}>
+            <div className={styles.infoItem}>
               <strong>Título:</strong>
               <span>{user?.title || 'Não informado'}</span>
             </div>
-            <div className="info-item">
+            <div className={styles.infoItem}>
               <strong>Taxa/Hora:</strong>
               <span>{user?.hourlyRate ? `R$ ${user.hourlyRate}` : 'Não informada'}</span>
             </div>
-            <div className="info-item">
+            <div className={styles.infoItem}>
               <strong>Localização:</strong>
               <span>{user?.location || 'Não informada'}</span>
             </div>
-            <div className="info-item">
+            <div className={styles.infoItem}>
               <strong>Telefone:</strong>
               <span>{user?.phone || 'Não informado'}</span>
             </div>
           </div>
         </div>
 
-        <div className="profile-section">
+        <div className={styles.profileSection}>
           <h3>Habilidades</h3>
-          <div className="skills-list">
+          <div className={styles.skillsList}>
             {user?.skills?.map((skill, index) => (
-              <span key={index} className="skill-tag">{skill}</span>
+              <span key={index} className={styles.skillTag}>{skill}</span>
             )) || (
-              <p className="no-skills">Nenhuma habilidade cadastrada</p>
+              <p className={styles.noSkills}>Nenhuma habilidade cadastrada</p>
             )}
           </div>
         </div>
 
         {user?.portfolio && (
-          <div className="profile-section">
+          <div className={styles.profileSection}>
             <h3>Portfólio</h3>
             <a 
               href={user.portfolio} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="portfolio-link"
+              className={styles.portfolioLink}
             >
               <i className="fas fa-external-link-alt"></i>
               {user.portfolio}

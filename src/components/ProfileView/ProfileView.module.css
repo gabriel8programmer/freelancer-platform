@@ -1,25 +1,25 @@
 /* src/components/ProfileView/ProfileView.css */
-.profile-view {
+.profileView {
   width: 100%;
 }
 
-.profile-card {
+.profileCard {
   background: white;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
 }
 
-.profile-section {
+.profileSection {
   padding: 2rem;
   border-bottom: 1px solid var(--light-gray);
 }
 
-.profile-section:last-child {
+.profileSection:last-child {
   border-bottom: none;
 }
 
-.profile-section h3 {
+.profileSection h3 {
   color: var(--dark);
   margin-bottom: 1.5rem;
   font-size: 1.25rem;
@@ -28,7 +28,7 @@
   gap: 0.5rem;
 }
 
-.profile-section h3::before {
+.profileSection h3::before {
   content: '';
   width: 4px;
   height: 1.25rem;
@@ -36,25 +36,25 @@
   border-radius: 2px;
 }
 
-.profile-bio {
+.profileBio {
   color: var(--dark);
   line-height: 1.6;
   font-size: 1rem;
 }
 
-.info-grid {
+.infoGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
 }
 
-.info-item {
+.infoItem {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 
-.info-item strong {
+.infoItem strong {
   color: var(--gray);
   font-size: 0.9rem;
   font-weight: 600;
@@ -62,19 +62,19 @@
   letter-spacing: 0.5px;
 }
 
-.info-item span {
+.infoItem span {
   color: var(--dark);
   font-size: 1rem;
   font-weight: 500;
 }
 
-.skills-list {
+.skillsList {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
-.skill-tag {
+.skillTag {
   background: var(--primary);
   color: white;
   padding: 0.5rem 1rem;
@@ -84,18 +84,18 @@
   transition: var(--transition);
 }
 
-.skill-tag:hover {
+.skillTag:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
 }
 
-.no-skills {
+.noSkills {
   color: var(--gray);
   font-style: italic;
   margin: 0;
 }
 
-.portfolio-link {
+.portfolioLink {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -109,26 +109,26 @@
   word-break: break-all;
 }
 
-.portfolio-link:hover {
+.portfolioLink:hover {
   background: var(--light);
   border-color: var(--primary);
   transform: translateY(-2px);
   box-shadow: var(--shadow);
 }
 
-.portfolio-link i {
+.portfolioLink i {
   font-size: 0.8rem;
   opacity: 0.7;
 }
 
 /* Estados vazios/placeholder */
-.profile-bio:empty::before {
+.profileBio:empty::before {
   content: "Complete seu perfil para contar mais sobre você.";
   color: var(--gray);
   font-style: italic;
 }
 
-.info-item span:empty::before {
+.infoItem span:empty::before {
   content: "Não informado";
   color: var(--gray);
   font-style: italic;
@@ -136,36 +136,36 @@
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .profile-section {
+  .profileSection {
     padding: 1.5rem;
   }
 
-  .info-grid {
+  .infoGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .skills-list {
+  .skillsList {
     gap: 0.5rem;
   }
 
-  .skill-tag {
+  .skillTag {
     font-size: 0.85rem;
     padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .profile-section {
+  .profileSection {
     padding: 1.25rem;
   }
 
-  .profile-section h3 {
+  .profileSection h3 {
     font-size: 1.1rem;
     margin-bottom: 1rem;
   }
 
-  .portfolio-link {
+  .portfolioLink {
     width: 100%;
     justify-content: center;
     text-align: center;
@@ -173,7 +173,7 @@
 }
 
 /* Animações */
-.profile-card {
+.profileCard {
   animation: slideUp 0.5s ease-out;
 }
 

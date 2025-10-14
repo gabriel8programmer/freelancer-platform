@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import ProfileView from '../../components/ProfileView/ProfileView';
-import './ProfilePage.css';
+import styles from './ProfilePage.module.css';
 
 const ProfilePage = () => {
   const { user, logout } = useAuth();
@@ -27,23 +27,23 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="profile-page">
-      <div className="container">
-        <div className="profile-header">
-          <div className="profile-info">
-            <div className="avatar-large">{user?.avatar || '👤'}</div>
-            <div className="profile-details">
+    <div className={styles.profilePage}>
+      <div className={styles.container}>
+        <div className={styles.profileHeader}>
+          <div className={styles.profileInfo}>
+            <div className={styles.avatarLarge}>{user?.avatar || '👤'}</div>
+            <div className={styles.profileDetails}>
               <h1>{user?.name || 'Usuário'}</h1>
               <p>{user?.email}</p>
-              <span className="user-type">
+              <span className={styles.userType}>
                 {user?.userType === 'freelancer' ? 'Freelancer' : 'Cliente'}
               </span>
             </div>
           </div>
-          <div className="profile-actions">
+          <div className={styles.profileActions}>
             {!isEditing && (
               <button 
-                className="btn btn-secondary"
+                className={[styles.btn, styles.btnSecondary]}
                 onClick={handleEditProfile}
               >
                 <i className="fas fa-edit"></i>
@@ -51,7 +51,7 @@ const ProfilePage = () => {
               </button>
             )}
             <button 
-              className="btn btn-outline"
+              className={[styles.btn, styles.btnOutline]}
               onClick={handleLogout}
             >
               <i className="fas fa-sign-out-alt"></i>
@@ -60,7 +60,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <div className="profile-content">
+        <div className={styles.profileContent}>
           {isEditing ? (
             <ProfileForm 
               user={user}

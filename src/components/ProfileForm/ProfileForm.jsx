@@ -1,6 +1,6 @@
 // src/components/ProfileForm/ProfileForm.jsx
 import React, { useState } from 'react';
-import './ProfileForm.css';
+import styles from './ProfileForm.module.css';
 
 const ProfileForm = ({ user, onSave, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -109,7 +109,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="skills">Habilidades *</label>
           <input
             type="text"
@@ -123,7 +123,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
           <small>Separe as habilidades por vírgula</small>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="portfolio">Portfólio/LinkedIn</label>
           <input
             type="url"
@@ -135,7 +135,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="phone">Telefone</label>
           <input
             type="tel"
@@ -148,9 +148,9 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
         </div>
       </div>
 
-      <div className="form-actions">
+      <div className={styles.formActions}>
         {onCancel && (
-          <button type="button" className="btn btn-outline" onClick={onCancel}>
+          <button type="button" className={[styles.btn, styles.btnOutline]} onClick={onCancel}>
             Cancelar
           </button>
         )}

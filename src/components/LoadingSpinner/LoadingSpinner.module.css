@@ -1,5 +1,5 @@
 /* components/LoadingSpinner/LoadingSpinner.css */
-.loading-spinner {
+.loadingSpinner {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -7,11 +7,11 @@
 	padding: 2rem;
 }
 
-.loading-spinner.small {
+.loadingSpinner.small {
 	padding: 1rem;
 }
 
-.loading-spinner.large {
+.loadingSpinner.large {
 	padding: 4rem;
 }
 
@@ -24,19 +24,19 @@
 	animation: spin 1s linear infinite;
 }
 
-.loading-spinner.small .spinner {
+.loadingSpinner.small .spinner {
 	width: 20px;
 	height: 20px;
 	border-width: 2px;
 }
 
-.loading-spinner.large .spinner {
+.loadingSpinner.large .spinner {
 	width: 60px;
 	height: 60px;
 	border-width: 6px;
 }
 
-.loading-text {
+.loadingText {
 	margin-top: 1rem;
 	color: #666;
 	font-size: 0.9rem;
