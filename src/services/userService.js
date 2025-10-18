@@ -40,6 +40,56 @@ class UserService {
 		}
 	}
 
+	// Buscar freelancers similares (por habilidades)
+	async getSimilarFreelancers(freelancerId, limit = 4) {
+		try {
+			const response = await api.get(`/users/freelancers/${freelancerId}/similar?limit=${limit}`)
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
+	// Buscar avaliações do freelancer
+	async getFreelancerReviews(freelancerId, page = 1) {
+		try {
+			const response = await api.get(`/users/freelancers/${freelancerId}/reviews?page=${page}`)
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
+	// Adicionar avaliação ao freelancer
+	async addFreelancerReview(freelancerId, reviewData) {
+		try {
+			const response = await api.post(`/users/freelancers/${freelancerId}/reviews`, reviewData)
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
+	// Verificar disponibilidade do freelancer
+	async checkFreelancerAvailability(freelancerId) {
+		try {
+			const response = await api.get(`/users/freelancers/${freelancerId}/availability`)
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
+	// Buscar portfólio do freelancer
+	async getFreelancerPortfolio(freelancerId) {
+		try {
+			const response = await api.get(`/users/freelancers/${freelancerId}/portfolio`)
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
 	// Buscar todos os clientes
 	async getClients(filters = {}) {
 		try {
@@ -68,25 +118,36 @@ class UserService {
 		}
 	}
 
-	// Upload de avatar (simulado)
+	// Upload de avatar
 	async uploadAvatar(file) {
 		try {
-			// Em uma implementação real, aqui faria o upload para um serviço como AWS S3
-			// Por enquanto, vamos simular um delay e retornar uma URL fictícia
-			return new Promise((resolve) => {
-				setTimeout(() => {
-					resolve({
-						url: `https://ui-avatars.com/api/?name=User&background=random&size=128`,
-						message: 'Avatar atualizado com sucesso',
-					})
-				}, 1000)
+			const formData = new FormData()
+			formData.append('avatar', file)
+
+			const response = await api.post('/users/upload-avatar', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
 			})
+			return response.data
+		} catch (error) {
+			throw this.handleError(error)
+		}
+	}
+
+	// Buscar estatísticas do usuário
+	async getUserStats(userId) {
+		try {
+			const response = await api.get(`/users/${userId}/stats`)
+			return response.data
 		} catch (error) {
 			throw this.handleError(error)
 		}
 	}
 
 	handleError(error) {
+		console.error('Erro no UserService:', error)
+
 		if (error.response?.data?.message) {
 			throw new Error(error.response.data.message)
 		} else if (error.message) {

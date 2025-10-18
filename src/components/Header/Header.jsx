@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAuth } from '../../contexts/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import Avatar from 'react-avatar'
 import styles from './Header.module.css'
 
 const Header = () => {
@@ -61,16 +62,6 @@ const Header = () => {
     setUserDropdownOpen(!userDropdownOpen)
   }
 
-  // Obter avatar do usuário ou usar placeholder
-  const getUserAvatar = () => {
-    if (user?.avatar) {
-      return user.avatar
-    }
-    // Avatar placeholder baseado no nome
-    const userName = user?.name || 'Usuário'
-    return `https://ui-avatars.com/api/?name=${encodeURIComponent(userName)}&background=4361ee&color=fff&size=128`
-  }
-
   // Obter nome de exibição
   const getDisplayName = () => {
     return user?.name || user?.username || 'Usuário'
@@ -120,9 +111,12 @@ const Header = () => {
                   aria-expanded={userDropdownOpen}
                   aria-haspopup="true"
                 >
-                  <img 
-                    src={getUserAvatar()} 
-                    alt={getDisplayName()}
+                  <Avatar
+                    name={getDisplayName()}
+                    src={user?.avatar}
+                    size="36"
+                    round={true}
+                    textSizeRatio={2}
                     className={styles.userAvatar}
                   />
                   <span className={styles.userName}>{getDisplayName()}</span>
@@ -133,9 +127,12 @@ const Header = () => {
                 {userDropdownOpen && (
                   <div className={styles.userDropdown}>
                     <div className={styles.dropdownHeader}>
-                      <img 
-                        src={getUserAvatar()} 
-                        alt={getDisplayName()}
+                      <Avatar
+                        name={getDisplayName()}
+                        src={user?.avatar}
+                        size="52"
+                        round={true}
+                        textSizeRatio={2}
                         className={styles.dropdownAvatar}
                       />
                       <div className={styles.dropdownUserInfo}>
@@ -215,9 +212,12 @@ const Header = () => {
           {isAuthenticated ? (
             <div className={styles.mobileUserActions}>
               <div className={styles.mobileUserInfo}>
-                <img 
-                  src={getUserAvatar()} 
-                  alt={getDisplayName()}
+                <Avatar
+                  name={getDisplayName()}
+                  src={user?.avatar}
+                  size="52"
+                  round={true}
+                  textSizeRatio={2}
                   className={styles.mobileUserAvatar}
                 />
                 <div className={styles.mobileUserDetails}>

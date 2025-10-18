@@ -1,13 +1,15 @@
 // components/FreelancerCard/FreelancerCard.jsx
+import { Link } from 'react-router-dom'
+import Avatar from 'react-avatar'
 import styles from './FreelancerCard.module.css'
 
 const FreelancerCard = ({ freelancer }) => {
-  // Formatar nome - usar name ou username
+  // Formatar nome
   const getDisplayName = () => {
     return freelancer.name || freelancer.username || 'Freelancer'
   }
 
-  // Formatar título/tagline
+  // Formatar título
   const getTitle = () => {
     return freelancer.title || freelancer.tagline || freelancer.specialization || 'Freelancer'
   }
@@ -27,16 +29,23 @@ const FreelancerCard = ({ freelancer }) => {
     return freelancer.skills || freelancer.expertise || []
   }
 
-  // Obter avatar
-  const getAvatar = () => {
-    return freelancer.avatar || freelancer.profileImage || `/avatars/default-avatar.jpg`
+  // Obter ID do freelancer - AGORA USA O ID REAL DA BASE
+  const getFreelancerId = () => {
+    return freelancer._id || freelancer.id
   }
 
   return (
     <div className={styles.freelancerCard}>
       <div className={styles.freelancerHeader}>
         <div className={styles.freelancerAvatar}>
-          <img src={getAvatar()} alt={getDisplayName()} />
+          <Avatar
+            name={getDisplayName()}
+            src={freelancer.avatar || freelancer.profileImage}
+            size="80"
+            round={true}
+            textSizeRatio={2}
+            className={styles.avatarImage}
+          />
         </div>
         <div className={styles.freelancerInfo}>
           <h3 className={styles.freelancerName}>{getDisplayName()}</h3>
@@ -66,10 +75,13 @@ const FreelancerCard = ({ freelancer }) => {
       </div>
 
       <div className={styles.freelancerFooter}>
-        <button className={styles.btnViewProfile}>
+        <Link 
+          to={`/freelancer/${getFreelancerId()}`}
+          className={styles.btnViewProfile}
+        >
           <i className="fas fa-eye"></i>
           Ver Perfil
-        </button>
+        </Link>
       </div>
     </div>
   )

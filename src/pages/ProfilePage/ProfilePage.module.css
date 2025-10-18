@@ -1,96 +1,119 @@
-/* src/pages/ProfilePage/ProfilePage.css */
+/* src/pages/ProfilePage/ProfilePage.module.css */
 .profilePage {
-  padding: 2rem 0;
-  min-height: 80vh;
+	padding: 2rem 0;
+	min-height: 80vh;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
 }
 
 .profileHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--light-gray);
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 3rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid #e1e1e1; /* fallback para --light-gray */
 }
 
 .profileInfo {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
+	display: flex;
+	gap: 1.5rem;
+	align-items: flex-start;
 }
 
 .avatarLarge {
-  font-size: 4rem;
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--light-gray);
-  border-radius: 50%;
+	font-size: 4rem;
+	width: 80px;
+	height: 80px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f5f5f5; /* fallback para --light-gray */
+	border-radius: 50%;
 }
 
 .profileDetails h1 {
-  color: var(--dark);
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
+	color: #333; /* fallback para --dark */
+	margin-bottom: 0.5rem;
+	font-size: 2rem;
 }
 
 .profileDetails p {
-  color: var(--gray);
-  margin-bottom: 0.5rem;
+	color: #666; /* fallback para --gray */
+	margin-bottom: 0.5rem;
 }
 
 .userType {
-  background: var(--primary);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
+	background: #007bff; /* fallback para --primary */
+	color: white;
+	padding: 0.25rem 0.75rem;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: 600;
 }
 
 .profileActions {
-  display: flex;
-  gap: 1rem;
+	display: flex;
+	gap: 1rem;
+}
+
+.btn {
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+	transition: all 0.3s ease;
+}
+
+.btnSecondary {
+	background: #6c757d;
+	color: white;
 }
 
 .btnOutline {
-  background: transparent;
-  color: var(--gray);
-  border: 1px solid var(--light-gray);
+	background: transparent;
+	color: #666;
+	border: 1px solid #e1e1e1;
 }
 
 .btnOutline:hover {
-  background: var(--light-gray);
-  color: var(--dark);
+	background: #f5f5f5;
+	color: #333;
 }
 
 .profileContent {
-  max-width: 800px;
-  margin: 0 auto;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 @media (max-width: 768px) {
-  .profileHeader {
-     align-items: center;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
+	.profileHeader {
+		align-items: center;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
 
-  .profileActions {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+	.profileActions {
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}
 
-  .profileInfo {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
+	.profileInfo {
+		flex-direction: column;
+		text-align: center;
+		gap: 1rem;
+	}
 
-  .avatarLarge {
-    align-self: center;
-  }
+	.avatarLarge {
+		align-self: center;
+	}
 }

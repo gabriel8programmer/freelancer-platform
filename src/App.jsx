@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage/RegisterPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
+import FreelancerProfile from './pages/FreelancerProfilePage/FreelancerProfilePage';
 
 function AppContent() {
   const { isAuthenticated } = useAuth();
@@ -23,6 +24,7 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/projetos" element={<ProjectsPage />} />
           <Route path="/freelancers" element={<FreelancersPage />} />
+          <Route path="/freelancer/:id" element={<FreelancerProfile />} /> 
           <Route path="/publicar" element={<PostProjectPage />} />
           <Route 
             path="/login" 

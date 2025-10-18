@@ -34,12 +34,12 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
   };
 
   return (
-    <form className="profile-form" onSubmit={handleSubmit}>
-      <div className="form-section">
+    <form className={styles.profileForm} onSubmit={handleSubmit}>
+      <div className={styles.formSection}>
         <h3>Informações Pessoais</h3>
         
-        <div className="form-row">
-          <div className="form-group">
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
             <label htmlFor="name">Nome Completo *</label>
             <input
               type="text"
@@ -51,7 +51,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
             />
           </div>
           
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="title">Título Profissional *</label>
             <input
               type="text"
@@ -65,7 +65,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
           </div>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <label htmlFor="bio">Bio *</label>
           <textarea
             id="bio"
@@ -79,11 +79,11 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
         </div>
       </div>
 
-      <div className="form-section">
+      <div className={styles.formSection}>
         <h3>Informações Profissionais</h3>
         
-        <div className="form-row">
-          <div className="form-group">
+        <div className={styles.formRow}>
+          <div className={styles.formGroup}>
             <label htmlFor="hourlyRate">Taxa por Hora (R$) *</label>
             <input
               type="number"
@@ -96,7 +96,7 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
             />
           </div>
           
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <label htmlFor="location">Localização</label>
             <input
               type="text"
@@ -150,11 +150,18 @@ const ProfileForm = ({ user, onSave, onCancel }) => {
 
       <div className={styles.formActions}>
         {onCancel && (
-          <button type="button" className={[styles.btn, styles.btnOutline]} onClick={onCancel}>
+          <button 
+            type="button" 
+            className={`${styles.btn} ${styles.btnOutline}`} 
+            onClick={onCancel}
+          >
             Cancelar
           </button>
         )}
-        <button type="submit" className="btn btn-primary">
+        <button 
+          type="submit" 
+          className={`${styles.btn} ${styles.btnPrimary}`}
+        >
           Salvar Perfil
         </button>
       </div>

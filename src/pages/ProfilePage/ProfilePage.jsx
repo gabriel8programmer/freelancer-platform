@@ -6,6 +6,7 @@ import ProfileForm from '../../components/ProfileForm/ProfileForm';
 import ProfileView from '../../components/ProfileView/ProfileView';
 import styles from './ProfilePage.module.css';
 
+// src/pages/ProfilePage/ProfilePage.jsx
 const ProfilePage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -17,7 +18,6 @@ const ProfilePage = () => {
   };
 
   const handleSaveProfile = (profileData) => {
-    // Em uma aplicação real, aqui faria a requisição para a API
     console.log('Perfil salvo:', profileData);
     setIsEditing(false);
   };
@@ -43,7 +43,7 @@ const ProfilePage = () => {
           <div className={styles.profileActions}>
             {!isEditing && (
               <button 
-                className={[styles.btn, styles.btnSecondary]}
+                className={`${styles.btn} ${styles.btnSecondary}`} // CORRIGIDO
                 onClick={handleEditProfile}
               >
                 <i className="fas fa-edit"></i>
@@ -51,7 +51,7 @@ const ProfilePage = () => {
               </button>
             )}
             <button 
-              className={[styles.btn, styles.btnOutline]}
+              className={`${styles.btn} ${styles.btnOutline}`} // CORRIGIDO
               onClick={handleLogout}
             >
               <i className="fas fa-sign-out-alt"></i>
@@ -65,7 +65,7 @@ const ProfilePage = () => {
             <ProfileForm 
               user={user}
               onSave={handleSaveProfile}
-              onCancel={() => user?.profileComplete && setIsEditing(false)}
+              onCancel={() => setIsEditing(false)} // CORRIGIDO
             />
           ) : (
             <ProfileView user={user} />

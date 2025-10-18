@@ -410,6 +410,21 @@
 	outline-offset: 2px;
 }
 
+.userAvatar {
+	border-radius: 50%;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.dropdownAvatar {
+	border-radius: 50%;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.mobileUserAvatar {
+	border-radius: 50%;
+	border: 3px solid #4361ee;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
 	.navDesktop {
