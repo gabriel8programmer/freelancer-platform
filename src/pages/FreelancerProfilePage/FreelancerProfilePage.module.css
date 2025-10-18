@@ -96,15 +96,23 @@
 	font-size: 1.1rem;
 }
 
+/* AÇÕES DO PERFIL - MODIFICAÇÃO PRINCIPAL */
 .profileActions {
 	display: flex;
 	gap: 1rem;
-	flex-wrap: wrap;
+	align-items: center;
+}
+
+/* Em telas maiores: botões lado a lado */
+.profileActions {
+	flex-direction: row;
 }
 
 .contactBtn,
 .hireBtn {
+	flex: 1;
 	min-width: 160px;
+	max-width: 200px;
 }
 
 /* Conteúdo Principal */
@@ -305,7 +313,7 @@
 	margin-bottom: 2rem;
 }
 
-/* Responsive */
+/* RESPONSIVE - MODIFICAÇÕES PRINCIPAIS */
 @media (max-width: 968px) {
 	.profileContent {
 		grid-template-columns: 1fr;
@@ -348,6 +356,7 @@
 	}
 }
 
+/* MOBILE - BOTÕES EMPILHADOS */
 @media (max-width: 480px) {
 	.profileName {
 		font-size: 1.5rem;
@@ -363,17 +372,35 @@
 		align-items: center;
 	}
 
+	/* AQUI ESTÁ A PRINCIPAL MODIFICAÇÃO */
 	.profileActions {
 		flex-direction: column;
+		width: 100%;
+		gap: 0.75rem;
 	}
 
 	.contactBtn,
 	.hireBtn {
 		min-width: auto;
 		width: 100%;
+		max-width: none;
 	}
 
 	.statsGrid {
 		grid-template-columns: 1fr;
+	}
+}
+
+/* Breakpoint adicional para tablets pequenos */
+@media (max-width: 600px) {
+	.profileActions {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.contactBtn,
+	.hireBtn {
+		width: 100%;
+		max-width: none;
 	}
 }

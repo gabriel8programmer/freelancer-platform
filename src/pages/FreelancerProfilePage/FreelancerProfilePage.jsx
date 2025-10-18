@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useFreelancers } from '../../hooks/useFreelancers'
 import Avatar from 'react-avatar'
 import styles from './FreelancerProfilePage.module.css'
+import Button from '../../components/Button/Button'
 
 const FreelancerProfile = () => {
   const { id } = useParams()
@@ -14,6 +15,16 @@ const FreelancerProfile = () => {
     fetchFreelancerById,
     clearCurrentFreelancer 
   } = useFreelancers()
+
+  useEffect(() => {
+    if (id) {
+      fetchFreelancerById(id)
+    }
+
+    return () => {
+      clearCurrentFreelancer()
+    }
+  }, [id])
 
   useEffect(() => {
     console.log('Buscando freelancer com ID:', id) // Debug
@@ -134,17 +145,23 @@ const FreelancerProfile = () => {
               </div>
 
               <div className={styles.profileActions}>
-                <button className={`btn btn-primary ${styles.contactBtn}`}>
-                  <i className="fas fa-envelope"></i>
-                  Entrar em Contato
-                </button>
-                <button 
-                  className={`btn btn-outline ${styles.hireBtn}`}
-                  disabled={!freelancer.available}
+                <Button
+                  variant="primary"
+                  size="large"
+                  
+                  fullWidth
                 >
-                  <i className="fas fa-briefcase"></i>
+                  Entrar em Contato
+                </Button>
+                
+                <Button
+                  variant={freelancer.available ? "secondary" : "outline"}
+                  size="large"
+                  disabled={!freelancer.available}
+                  fullWidth
+                >
                   {freelancer.available ? 'Contratar' : 'Indisponível'}
-                </button>
+                </Button>
               </div>
             </div>
           </div>
@@ -264,14 +281,19 @@ const FreelancerProfile = () => {
             <div className={styles.sidebarSection}>
               <h4 className={styles.sidebarTitle}>Ações Rápidas</h4>
               <div className={styles.quickActions}>
-                <button className={`btn btn-outline ${styles.actionBtn}`}>
-                  <i className="fas fa-file-alt"></i>
+                <Button
+                  variant="outline"
+                  size="small"
+                >
                   Baixar CV
-                </button>
-                <button className={`btn btn-outline ${styles.actionBtn}`}>
-                  <i className="fas fa-share-alt"></i>
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  size="small"
+                >
                   Compartilhar
-                </button>
+                </Button>
               </div>
             </div>
           </div>

@@ -1,0 +1,146 @@
+/* components/PublishProjectModal/PublishProjectModal.module.css */
+.publishProjectModal {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.modalDescription {
+	background: var(--light);
+	padding: 1rem;
+	border-radius: var(--border-radius);
+	border-left: 4px solid var(--primary);
+	margin-bottom: 0.5rem;
+}
+
+.modalDescription p {
+	color: var(--dark);
+	font-size: 0.95rem;
+	margin: 0;
+	font-weight: 500;
+}
+
+.projectForm {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.formSection {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--light-gray);
+}
+
+.formSection:last-of-type {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.sectionTitle {
+	color: var(--dark);
+	font-size: 1.1rem;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: 600;
+}
+
+.sectionTitle i {
+	color: var(--primary);
+	font-size: 0.9rem;
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.formRow {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.label {
+	font-weight: 600;
+	color: var(--dark);
+	font-size: 0.9rem;
+}
+
+.input,
+.select,
+.textarea {
+	padding: 0.75rem 1rem;
+	border: 2px solid var(--light-gray);
+	border-radius: var(--border-radius);
+	font-size: 0.95rem;
+	font-family: inherit;
+	transition: var(--transition);
+	background: white;
+	width: 100%;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+}
+
+.textarea {
+	resize: vertical;
+	min-height: 120px;
+	line-height: 1.5;
+}
+
+.select {
+	cursor: pointer;
+}
+
+.helperText {
+	font-size: 0.8rem;
+	color: var(--gray);
+	margin-top: 0.25rem;
+}
+
+.formActions {
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+	padding-top: 1rem;
+	border-top: 1px solid var(--light-gray);
+	margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.formRow {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	.formActions {
+		flex-direction: column;
+	}
+
+	.formSection {
+		gap: 1rem;
+		padding-bottom: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.projectForm {
+		gap: 1.5rem;
+	}
+
+	.sectionTitle {
+		font-size: 1rem;
+	}
+}

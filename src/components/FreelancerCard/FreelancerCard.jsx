@@ -41,7 +41,7 @@ const FreelancerCard = ({ freelancer }) => {
           <Avatar
             name={getDisplayName()}
             src={freelancer.avatar || freelancer.profileImage}
-            size="80"
+            size="50"
             round={true}
             textSizeRatio={2}
             className={styles.avatarImage}
