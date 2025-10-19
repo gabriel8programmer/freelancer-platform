@@ -14,12 +14,12 @@ class AuthService {
 
 			console.log('✅ Resposta do login:', response.data)
 
-			if (response.data.token) {
-				localStorage.setItem('token', response.data.token)
-				localStorage.setItem('user', JSON.stringify(response.data))
-				console.log('💾 Token salvo no localStorage')
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken)
+				localStorage.setItem('user', JSON.stringify(response.data.user))
+				console.log('💾 Access Token salvo no localStorage')
 			} else {
-				console.warn('⚠️ Nenhum token recebido na resposta')
+				console.warn('⚠️ Nenhum access token recebido na resposta')
 			}
 
 			return response.data
@@ -43,9 +43,9 @@ class AuthService {
 
 			console.log('✅ Resposta do registro:', response.data)
 
-			if (response.data.token) {
-				localStorage.setItem('token', response.data.token)
-				localStorage.setItem('user', JSON.stringify(response.data))
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken)
+				localStorage.setItem('user', JSON.stringify(response.data.user))
 			}
 
 			return response.data
@@ -64,15 +64,50 @@ class AuthService {
 
 			console.log('✅ Resposta do login Google:', response.data)
 
-			if (response.data.token) {
-				localStorage.setItem('token', response.data.token)
-				localStorage.setItem('user', JSON.stringify(response.data))
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken)
+				localStorage.setItem('user', JSON.stringify(response.data.user))
 			}
 
 			return response.data
 		} catch (error) {
 			console.error('❌ Erro no authService.loginWithGoogle:', error.response?.data)
 			throw this.handleError(error)
+		}
+	}
+
+	// Refresh token
+	async refreshToken() {
+		try {
+			console.log('🔄 Tentando refresh token...')
+			const response = await api.post('/auth/refresh-token')
+
+			if (response.data.accessToken) {
+				localStorage.setItem('accessToken', response.data.accessToken)
+				console.log('✅ Novo access token salvo')
+			}
+
+			return response.data
+		} catch (error) {
+			console.error('❌ Erro no refresh token:', error.response?.data)
+			throw this.handleError(error)
+		}
+	}
+
+	// Logout
+	async logout() {
+		try {
+			console.log('🚪 Fazendo logout...')
+			// Chama API para logout no backend
+			await api.post('/auth/logout')
+		} catch (error) {
+			console.error('❌ Erro ao chamar logout API:', error.response?.data)
+			// Continua mesmo com erro na API
+		} finally {
+			// Sempre limpa o localStorage
+			localStorage.removeItem('accessToken')
+			localStorage.removeItem('user')
+			console.log('✅ Logout concluído')
 		}
 	}
 
@@ -87,19 +122,12 @@ class AuthService {
 		}
 	}
 
-	// Logout
-	logout() {
-		console.log('🚪 Fazendo logout...')
-		localStorage.removeItem('token')
-		localStorage.removeItem('user')
-		console.log('✅ Logout concluído')
-	}
-
 	// Verificar se está autenticado
 	isAuthenticated() {
-		const token = localStorage.getItem('token')
-		console.log('🔍 Verificando autenticação:', !!token)
-		return !!token
+		const token = localStorage.getItem('accessToken')
+		const hasUser = localStorage.getItem('user')
+		console.log('🔍 Verificando autenticação:', !!token && !!hasUser)
+		return !!token && !!hasUser
 	}
 
 	// Obter usuário do localStorage
@@ -110,7 +138,7 @@ class AuthService {
 
 	// Obter token
 	getToken() {
-		return localStorage.getItem('token')
+		return localStorage.getItem('accessToken')
 	}
 
 	// Tratamento de erros
@@ -131,6 +159,11 @@ class AuthService {
 				return new Error(message || 'Dados inválidos. Verifique as informações.')
 			case 401:
 				return new Error(message || 'Email ou senha incorretos.')
+			case 403:
+				if (error.response.data?.code === 'TOKEN_EXPIRED') {
+					return new Error('Sessão expirada. Faça login novamente.')
+				}
+				return new Error(message || 'Acesso não autorizado.')
 			case 404:
 				return new Error(message || 'Serviço não encontrado.')
 			case 500:
